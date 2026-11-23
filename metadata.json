@@ -1,0 +1,6 @@
+{
+  "name": "STARLIGHT",
+  "description": "Connect, share, and shine on STARLIGHT — a social media app with posts, stories, reels, real-time messaging, explore, and profiles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,268 @@
+{
+  "entities": {
+    "PrivateUser": {
+      "title": "PrivateUser",
+      "description": "Private user account and settings isolated to the owner.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "privateAccount": { "type": "boolean" },
+        "darkMode": { "type": "boolean" },
+        "pushNotifications": { "type": "boolean" },
+        "profileSetupComplete": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp via FieldValue.serverTimestamp()" }
+      },
+      "required": ["userId", "email", "username", "displayName", "privateAccount", "darkMode", "pushNotifications", "profileSetupComplete", "createdAt", "updatedAt"]
+    },
+    "PublicProfile": {
+      "title": "PublicProfile",
+      "description": "Discoverable user profile without PII.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "bio": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "visibility": { "type": "string", "enum": ["public", "private"] },
+        "online": { "type": "boolean" },
+        "verified": { "type": "boolean" },
+        "followersCount": { "type": "integer" },
+        "followingCount": { "type": "integer" },
+        "postsCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "username", "displayName", "bio", "avatarUrl", "visibility", "online", "verified", "followersCount", "followingCount", "postsCount", "createdAt", "updatedAt"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Feed post or vertical Reel.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "postType": { "type": "string", "enum": ["post", "reel"] },
+        "mediaType": { "type": "string", "enum": ["image", "video"] },
+        "mediaUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "category": { "type": "string" },
+        "hashtags": { "type": "array" },
+        "musicTitle": { "type": "string" },
+        "visibility": { "type": "string", "enum": ["public", "private"] },
+        "likesCount": { "type": "integer" },
+        "commentsCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "authorUsername", "authorAvatar", "postType", "mediaType", "mediaUrl", "thumbnailUrl", "caption", "category", "hashtags", "musicTitle", "visibility", "likesCount", "commentsCount", "createdAt", "updatedAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on a post or reel.",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "postOwnerId": { "type": "string" },
+        "postVisibility": { "type": "string", "enum": ["public", "private"] },
+        "userId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "postOwnerId", "postVisibility", "userId", "authorUsername", "authorAvatar", "text", "createdAt", "updatedAt"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "24-hour story or profile highlight.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "mediaType": { "type": "string", "enum": ["image", "video"] },
+        "mediaUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "highlight": { "type": "boolean" },
+        "highlightTitle": { "type": "string" },
+        "visibility": { "type": "string", "enum": ["public", "private"] },
+        "viewsCount": { "type": "integer" },
+        "expiresAtEpochMs": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "authorUsername", "authorAvatar", "mediaType", "mediaUrl", "caption", "highlight", "highlightTitle", "visibility", "viewsCount", "expiresAtEpochMs", "createdAt", "updatedAt"]
+    },
+    "UserPostRef": {
+      "title": "UserPostRef",
+      "description": "User-scoped liked or saved post reference.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "postId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "postId", "createdAt", "updatedAt"]
+    },
+    "FollowRef": {
+      "title": "FollowRef",
+      "description": "User-scoped follow record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "targetUserId": { "type": "string" },
+        "targetUsername": { "type": "string" },
+        "targetAvatar": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "targetUserId", "targetUsername", "targetAvatar", "createdAt", "updatedAt"]
+    },
+    "BlockedUserRef": {
+      "title": "BlockedUserRef",
+      "description": "User-scoped blocked user record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "targetUserId": { "type": "string" },
+        "targetUsername": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "targetUserId", "targetUsername", "createdAt", "updatedAt"]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "In-app social notification.",
+      "type": "object",
+      "properties": {
+        "recipientId": { "type": "string" },
+        "actorId": { "type": "string" },
+        "actorUsername": { "type": "string" },
+        "actorAvatar": { "type": "string" },
+        "type": { "type": "string", "enum": ["like", "comment", "follow", "message", "story"] },
+        "targetId": { "type": "string" },
+        "previewText": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["recipientId", "actorId", "actorUsername", "actorAvatar", "type", "targetId", "previewText", "read", "createdAt", "updatedAt"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Private 1-on-1 conversation metadata.",
+      "type": "object",
+      "properties": {
+        "participantUids": { "type": "array" },
+        "participantAId": { "type": "string" },
+        "participantBId": { "type": "string" },
+        "participantAName": { "type": "string" },
+        "participantBName": { "type": "string" },
+        "participantAAvatar": { "type": "string" },
+        "participantBAvatar": { "type": "string" },
+        "lastMessageText": { "type": "string" },
+        "lastMessageType": { "type": "string" },
+        "lastSenderId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["participantUids", "participantAId", "participantBId", "participantAName", "participantBName", "participantAAvatar", "participantBAvatar", "lastMessageText", "lastMessageType", "lastSenderId", "createdAt", "updatedAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Real-time chat message supporting text, photo, video, or voice.",
+      "type": "object",
+      "properties": {
+        "conversationId": { "type": "string" },
+        "participantUids": { "type": "array" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "messageType": { "type": "string", "enum": ["text", "image", "video", "audio"] },
+        "text": { "type": "string" },
+        "mediaUrl": { "type": "string" },
+        "durationMs": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["conversationId", "participantUids", "senderId", "senderName", "messageType", "text", "mediaUrl", "durationMs", "createdAt", "updatedAt"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "User moderation report.",
+      "type": "object",
+      "properties": {
+        "reporterId": { "type": "string" },
+        "targetType": { "type": "string", "enum": ["post", "user"] },
+        "targetId": { "type": "string" },
+        "reason": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["reporterId", "targetType", "targetId", "reason", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/PrivateUser" },
+      "description": "Owner-only private user account and settings."
+    },
+    "/users/{userId}/liked_posts/{postId}": {
+      "schema": { "$ref": "#/entities/UserPostRef" },
+      "description": "Posts liked by the user."
+    },
+    "/users/{userId}/saved_posts/{postId}": {
+      "schema": { "$ref": "#/entities/UserPostRef" },
+      "description": "Posts saved by the user."
+    },
+    "/users/{userId}/following/{targetUserId}": {
+      "schema": { "$ref": "#/entities/FollowRef" },
+      "description": "Creators followed by the user."
+    },
+    "/users/{userId}/blocked_users/{targetUserId}": {
+      "schema": { "$ref": "#/entities/BlockedUserRef" },
+      "description": "Users blocked by the user."
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/NotificationItem" },
+      "description": "Activity notifications for the user."
+    },
+    "/public_profiles/{userId}": {
+      "schema": { "$ref": "#/entities/PublicProfile" },
+      "description": "Publicly discoverable creator profiles."
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/Post" },
+      "description": "Feed posts and vertical reels."
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Comments on posts and reels."
+    },
+    "/stories/{storyId}": {
+      "schema": { "$ref": "#/entities/Story" },
+      "description": "24-hour stories and highlights."
+    },
+    "/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Private 1-on-1 conversations."
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/Message" },
+      "description": "Messages within a private conversation."
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/Report" },
+      "description": "Submitted abuse/content reports."
+    }
+  }
+}

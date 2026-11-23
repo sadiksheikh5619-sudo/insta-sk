@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">STARLIGHT</string>
+    <string name="tagline">Connect • Share • Shine ✨</string>
+    <string name="sign_in_with_google">Continue with Google</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_create">Create</string>
+    <string name="nav_reels">Reels</string>
+    <string name="nav_profile">Profile</string>
+    <string name="your_story">Your Story</string>
+    <string name="empty_feed_title">Your Starlight Feed Awaits</string>
+    <string name="empty_feed_subtitle">Share a cosmic photo, video, or follow creators in Explore to light up your feed.</string>
+    <string name="empty_reels_title">No Reels Yet</string>
+    <string name="empty_reels_subtitle">Be the first creator to post a vertical Starlight Reel with music and captions.</string>
+    <string name="empty_notifications">You are all caught up. Likes, comments, follows, and story views will appear here.</string>
+    <string name="empty_chats">No messages yet. Start a conversation with any creator from Explore or their profile.</string>
+</resources>
